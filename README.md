@@ -8,6 +8,8 @@
 In this repository, some CNN models implemented in tfgarden have been implemented as Attention insertable models. 
 Also, **MarNASNets** has been implemented.
 
+MARS means **M**obile-aware **A**ctivity **R**ecognition model**S**.
+
 ## Install
 
 ```bash
