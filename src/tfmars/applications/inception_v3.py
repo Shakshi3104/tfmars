@@ -247,3 +247,7 @@ def InceptionV3WithAttention(include_top=True, input_shape=(256, 3), pooling=Non
             print("Not exist pooling option: {}".format(pooling))
             model_ = Model(inputs=inputs, outputs=x)
             return model_
+
+
+def InceptionV3(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax'):
+    return InceptionV3WithAttention(include_top, input_shape, pooling, classes, classifier_activation, module=None)
