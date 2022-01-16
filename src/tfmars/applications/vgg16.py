@@ -1,5 +1,5 @@
 import tensorflow as tf
-from ..modules.attention import BaseAttention, SqueezeAndExcite
+from ..modules.attention import BaseAttention
 
 
 # ConvBlock for VGG

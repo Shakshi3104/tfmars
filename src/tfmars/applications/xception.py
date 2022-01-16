@@ -1,11 +1,12 @@
 from tensorflow.keras import layers
 from tensorflow.keras.models import Model
 
-from ..modules.attention import BaseAttention, SqueezeAndExcite
+from ..modules.attention import BaseAttention
 
 
+# Attention-insertable Xception
 def XceptionWithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6,
-                             classifier_activation='softmax', module: BaseAttention = SqueezeAndExcite):
+                             classifier_activation='softmax', module: BaseAttention=None):
     """
     Parameters
     ----------
@@ -28,7 +29,8 @@ def XceptionWithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
     x = layers.BatchNormalization(name='block1_conv2_bn')(x)
     x = layers.Activation('relu', name='block1_conv2_act')(x)
 
-    x = module(64, block_name="block1")(x)
+    if module is not None:
+        x = module(64, block_name="block1")(x)
 
     residual = layers.Conv1D(
         128, 1, strides=2, padding='same', use_bias=False
@@ -44,7 +46,8 @@ def XceptionWithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
     x = layers.MaxPooling1D(3, strides=2, padding='same', name='block2_pool')(x)
     x = layers.add([x, residual])
 
-    x = module(128, block_name="block2")(x)
+    if module is not None:
+        x = module(128, block_name="block2")(x)
 
     residual = layers.Conv1D(
         256, 1, strides=2, padding='same', use_bias=False
@@ -61,7 +64,8 @@ def XceptionWithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
     x = layers.MaxPooling1D(3, strides=2, padding='same', name='block3_pool')(x)
     x = layers.add([x, residual])
 
-    x = module(256, block_name="block3")(x)
+    if module is not None:
+        x = module(256, block_name="block3")(x)
 
     residual = layers.Conv1D(728, 1, strides=2, padding='same', use_bias=False)(x)
     residual = layers.BatchNormalization()(residual)
@@ -76,7 +80,8 @@ def XceptionWithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
     x = layers.MaxPooling1D(3, strides=2, padding='same', name='block4_pool')(x)
     x = layers.add([x, residual])
 
-    x = module(728, block_name="block4")(x)
+    if module is not None:
+        x = module(728, block_name="block4")(x)
 
     for i in range(8):
         residual = x
@@ -93,7 +98,8 @@ def XceptionWithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
 
         x = layers.add([x, residual])
 
-        x = module(728, block_name=prefix)(x)
+        if module is not None:
+            x = module(728, block_name=prefix)(x)
 
     residual = layers.Conv1D(1024, 1, strides=2, padding='same', use_bias=False)(x)
     residual = layers.BatchNormalization()(residual)
@@ -108,7 +114,8 @@ def XceptionWithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
     x = layers.MaxPooling1D(3, strides=2, padding='same')(x)
     x = layers.add([x, residual])
 
-    x = module(1024, block_name="block13")(x)
+    if module is not None:
+        x = module(1024, block_name="block13")(x)
 
     x = layers.SeparableConv1D(1536, 3, padding='same', use_bias=False, name='block14_sepconv1')(x)
     x = layers.BatchNormalization(name='block14_sepconv1_bn')(x)
@@ -118,7 +125,8 @@ def XceptionWithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
     x = layers.BatchNormalization(name='block14_sepconv2_bn')(x)
     x = layers.Activation('relu', name='block14_sepconv2_act')(x)
 
-    x = module(2048, block_name="block14")(x)
+    if module is not None:
+        x = module(2048, block_name="block14")(x)
 
     if include_top:
         x = layers.GlobalAveragePooling1D(name='avg_pool')(x)
@@ -143,4 +151,9 @@ def XceptionWithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
         else:
             print("Not exist pooling option: {}".format(pooling))
             model_ = Model(inputs=inputs, outputs=x)
-            return
+            return model_
+
+
+# Xception
+def Xception(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax'):
+    return XceptionWithAttention(include_top, input_shape, pooling, classes, classifier_activation, module=None)
