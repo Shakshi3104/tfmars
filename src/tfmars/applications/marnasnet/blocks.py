@@ -3,7 +3,7 @@ import tensorflow as tf
 from enum import Enum
 from abc import *
 
-from ..mbconv import MBConv
+from ..mobile_inverted_bottleneck import MBConv
 from ...modules.attention import SqueezeAndExcite
 
 
