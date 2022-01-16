@@ -282,8 +282,9 @@ def padding(x1, x2):
     return x1, x2
 
 
-def NASNetWithAttentioin(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
-                         module: BaseAttention=None,
+def NASNetWithAttentioin(include_top=True, input_shape=(256, 3), pooling=None, classes=6,
+                         classifier_activation='softmax',
+                         module: BaseAttention = None,
                          penultimate_filters=4032, num_blocks=6, stem_block_filters=96,
                          skip_reduction=True, filter_multiplier=2):
     inputs = layers.Input(shape=input_shape)
@@ -361,8 +362,9 @@ def NASNetWithAttentioin(include_top=True, input_shape=(256, 3), pooling=None, c
 
 
 # Attention-insertable NASNet Mobile
-def NASNetMobileWithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
-                       module: BaseAttention=None):
+def NASNetMobileWithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6,
+                              classifier_activation='softmax',
+                              module: BaseAttention = None):
     return NASNetWithAttentioin(include_top, input_shape, pooling, classes, classifier_activation, module,
                                 1056, 4, 32, False, 2)
 

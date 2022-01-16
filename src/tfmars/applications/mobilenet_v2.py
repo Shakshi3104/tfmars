@@ -66,8 +66,9 @@ class InvertedResBlock:
 
 
 # Attention-insertable MobileNetV2
-def MobileNetV2WithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
-                       module: BaseAttention=None, alpha=1.0):
+def MobileNetV2WithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6,
+                             classifier_activation='softmax',
+                             module: BaseAttention = None, alpha=1.0):
     """
     Parameters
     ----------
@@ -187,4 +188,5 @@ def MobileNetV2WithAttention(include_top=True, input_shape=(256, 3), pooling=Non
 # MobileNetV2
 def MobileNetV2(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
                 alpha=1.0):
-    return MobileNetV2WithAttention(include_top, input_shape, pooling, classes, classifier_activation, module=None, alpha=alpha)
+    return MobileNetV2WithAttention(include_top, input_shape, pooling, classes, classifier_activation, module=None,
+                                    alpha=alpha)

@@ -125,7 +125,8 @@ class InvertedResBlock:
         return x
 
 
-def MobileNetV3(stack_fn, last_point_ch, include_top=True, input_shape=(256, 3), pooling=None, alpha=1.0, minimalistic=False,
+def MobileNetV3(stack_fn, last_point_ch, include_top=True, input_shape=(256, 3), pooling=None, alpha=1.0,
+                minimalistic=False,
                 classes=6, dropout_rate=0.2, classifier_activation='softmax'):
     inputs = layers.Input(shape=input_shape)
 
@@ -208,8 +209,9 @@ def MobileNetV3(stack_fn, last_point_ch, include_top=True, input_shape=(256, 3),
 
 
 # Attention-insertable MobileNetV3 Small
-def MobileNetV3SmallWithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
-                       module: BaseAttention=None, alpha=1.0, minimalistic=False):
+def MobileNetV3SmallWithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6,
+                                  classifier_activation='softmax',
+                                  module: BaseAttention = None, alpha=1.0, minimalistic=False):
     def stack_fn(x, kernel, activation, se_ratio):
         def depth(d):
             return _depth(d * alpha)

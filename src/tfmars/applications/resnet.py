@@ -97,9 +97,11 @@ class ResidualBlock:
 
     def __call__(self, x):
         if not self.is_first:
-            x = self.block(self.nb_fil, 2, self.activation, self.kernel_initializer, block_name=self.block_name + "_1")(x)
+            x = self.block(self.nb_fil, 2, self.activation, self.kernel_initializer, block_name=self.block_name + "_1")(
+                x)
         else:
-            x = self.block(self.nb_fil, 1, self.activation, self.kernel_initializer, block_name=self.block_name + "_1")(x)
+            x = self.block(self.nb_fil, 1, self.activation, self.kernel_initializer, block_name=self.block_name + "_1")(
+                x)
 
         for i in range(1, self.repeats):
             x = self.block(self.nb_fil, 1, self.activation, self.kernel_initializer,
@@ -110,7 +112,7 @@ class ResidualBlock:
 
 # Attention-insertable ResNet 18
 def ResNet18WithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6,
-                             classifier_activation='softmax', module: BaseAttention=None):
+                          classifier_activation='softmax', module: BaseAttention = None):
     """
     Parameters
     ----------
@@ -129,7 +131,8 @@ def ResNet18WithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
 
     inputs = tf.keras.layers.Input(shape=input_shape)
 
-    x = tf.keras.layers.Conv1D(32, 7, strides=2, padding='same', kernel_initializer="he_normal", name="bottom_conv")(inputs)
+    x = tf.keras.layers.Conv1D(32, 7, strides=2, padding='same', kernel_initializer="he_normal", name="bottom_conv")(
+        inputs)
     x = tf.keras.layers.BatchNormalization(name="bottom_conv_bn")(x)
     x = tf.keras.layers.Activation('relu', name="bottom_conv_relu")(x)
 

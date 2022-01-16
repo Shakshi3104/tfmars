@@ -3,8 +3,9 @@ from ..modules.attention import BaseAttention
 
 
 # Attention-insertable Simple CNN
-def SimpleCNNWithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
-                           module: BaseAttention=None):
+def SimpleCNNWithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6,
+                           classifier_activation='softmax',
+                           module: BaseAttention = None):
     inputs = tf.keras.layers.Input(shape=input_shape)
     x = tf.keras.layers.Conv1D(50, 11, 1, padding="same", activation="relu",
                                kernel_initializer="he_normal", name="conv1")(inputs)

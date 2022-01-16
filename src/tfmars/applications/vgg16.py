@@ -32,7 +32,7 @@ class ConvBlock:
             x = tf.keras.layers.Conv1D(self.filters, kernel_size=self.kernel_size, strides=self.strides,
                                        padding=self.padding, activation=self.activation,
                                        kernel_initializer=self.kernel_initializer,
-                                       name="block{}_{}".format(self.block_id, i+1))(x)
+                                       name="block{}_{}".format(self.block_id, i + 1))(x)
 
         x = tf.keras.layers.MaxPooling1D(pool_size=self.pool_size, padding=self.padding,
                                          name="block{}_pool".format(self.block_id))(x)
@@ -41,7 +41,7 @@ class ConvBlock:
 
 # Attention-insertable VGG16
 def VGG16WithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
-                       module: BaseAttention=None):
+                       module: BaseAttention = None):
     """VGG16 with Submodule
     Parameters
     ----------
