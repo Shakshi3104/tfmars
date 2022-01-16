@@ -3,7 +3,7 @@ import math
 
 
 from .blocks import ConvBlock, SkipOperation, RegularConvBlock, MBConvBlock
-from ..mbconv import Top, Stem
+from ..mobile_inverted_bottleneck import Top, Stem
 
 
 # MarNASNet-C

@@ -1,5 +1,7 @@
 import tensorflow as tf
 
+from ..modules.attention import SqueezeAndExcite
+
 
 class MBConv:
     def __init__(self, activation="relu", drop_rate=0., kernel_size=3, filters_in=32, filters_out=16, strides=1,
@@ -92,51 +94,6 @@ class MBConv:
                 x = tf.keras.layers.Dropout(self.drop_rate, name=self.name + "drop")(x)
             x = tf.keras.layers.add([x, inputs], name=self.name + "add")
 
-        return x
-
-
-# Squeeze-and-Excitation module
-class SqueezeAndExcite:
-    """squeeze-and-excitation module
-    """
-    def __init__(self, filters, se_ratio=0.25, block_name=""):
-        """
-        Parameters
-        ----------
-        filters: int
-            output filter size
-        se_ratio: float
-            se ratio, se_ratio must be greater than 0 and less than or equal to 1.
-        block_name: str
-            block name
-        """
-        self.filters = filters
-        self.block_name = block_name
-        self.se_ratio = se_ratio
-
-    def __call__(self, x):
-        assert 0 < self.se_ratio <= 1, "se_ratio must be greater than 0 and less than or equal to 1."
-
-        filters_se = max(1, int(self.filters * self.se_ratio))
-        se = tf.keras.layers.GlobalAveragePooling1D(name="{}_se_squeeze".format(self.block_name))(x)
-        se = tf.keras.layers.Reshape((1, self.filters), name="{}_se_reshape".format(self.block_name))(se)
-        se = tf.keras.layers.Conv1D(
-            filters_se,
-            1,
-            padding="same",
-            activation="relu",
-            kernel_initializer="he_normal",
-            name="{}_se_reduce".format(self.block_name)
-        )(se)
-        se = tf.keras.layers.Conv1D(
-            self.filters,
-            1,
-            padding="same",
-            activation="sigmoid",
-            kernel_initializer="he_normal",
-            name="{}_se_expand".format(self.block_name)
-        )(se)
-        x = tf.keras.layers.multiply([x, se], name="{}_se_excite".format(self.block_name))
         return x
 
 

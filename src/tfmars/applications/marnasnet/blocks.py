@@ -3,7 +3,8 @@ import tensorflow as tf
 from enum import Enum
 from abc import *
 
-from ..mbconv import MBConv, SqueezeAndExcite
+from ..mbconv import MBConv
+from ...modules.attention import SqueezeAndExcite
 
 
 # ConvOps enum
