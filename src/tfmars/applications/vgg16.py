@@ -41,7 +41,7 @@ class ConvBlock:
 
 # Attention-insertable VGG16
 def VGG16WithAttention(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
-                       module: BaseAttention = SqueezeAndExcite):
+                       module: BaseAttention=None):
     """VGG16 with Submodule
     Parameters
     ----------
@@ -57,15 +57,20 @@ def VGG16WithAttention(include_top=True, input_shape=(256, 3), pooling=None, cla
     """
     inputs = tf.keras.layers.Input(shape=input_shape)
     x = ConvBlock(2, 64, block_id=1)(inputs)
-    x = module(64, block_name="block1")(x)
+    if module is not None:
+        x = module(64, block_name="block1")(x)
     x = ConvBlock(2, 128, block_id=2)(x)
-    x = module(128, block_name="block2")(x)
+    if module is not None:
+        x = module(128, block_name="block2")(x)
     x = ConvBlock(3, 256, block_id=3)(x)
-    x = module(256, block_name="block3")(x)
+    if module is not None:
+        x = module(256, block_name="block3")(x)
     x = ConvBlock(3, 512, block_id=4)(x)
-    x = module(512, block_name="block4")(x)
+    if module is not None:
+        x = module(512, block_name="block4")(x)
     x = ConvBlock(3, 512, block_id=5)(x)
-    x = module(512, block_name="block5")(x)
+    if module is not None:
+        x = module(512, block_name="block5")(x)
 
     if include_top:
         x = tf.keras.layers.Flatten()(x)
@@ -93,3 +98,8 @@ def VGG16WithAttention(include_top=True, input_shape=(256, 3), pooling=None, cla
             print("Not exist pooling option: {}".format(pooling))
             model_ = tf.keras.models.Model(inputs=inputs, outputs=x)
             return model_
+
+
+# VGG16
+def VGG16(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax'):
+    return VGG16WithAttention(include_top, input_shape, pooling, classes, classifier_activation, module=None)
