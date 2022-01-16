@@ -256,7 +256,7 @@ def MobileNetV3SmallWithAttention(include_top=True, input_shape=(256, 3), poolin
 
 
 # MobileNetV3 Small
-def MobileNetV3(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
+def MobileNetV3Small(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
                 alpha=1.0, minimalistic=False):
     return MobileNetV3SmallWithAttention(include_top, input_shape, pooling, classes, classifier_activation,
                                          module=None, alpha=alpha, minimalistic=minimalistic)
