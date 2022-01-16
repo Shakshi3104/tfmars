@@ -7,7 +7,7 @@ from ..mobile_inverted_bottleneck import Top, Stem
 
 
 # MarNASNet-C
-def MarNASNetC(width_coefficient, depth_coefficient, depth_divisor=8,
+def MarNASNetC(width_coefficient=1.0, depth_coefficient=1.0, depth_divisor=8,
                include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax'):
     """
     Parameters
