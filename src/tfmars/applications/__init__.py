@@ -13,6 +13,8 @@ from efficientnet_lite import EfficientNetLite0, EfficientNetLite0WithAttention
 from efficientnet import EfficientNetB0, EfficientNetB0WithAttention
 from densenet import DenseNet121, DenseNet121WithAttention
 
+from marnasnet.marnasnet_c import MarNASNetC
+
 __all__ = [
     "VGG16", "VGG16WithAttention",
     "Xception", "XceptionWithAttention",
@@ -27,5 +29,6 @@ __all__ = [
     "InceptionV3", "InceptionV3WithAttention",
     "EfficientNetB0", "EfficientNetB0WithAttention",
     "EfficientNetLite0", "EfficientNetLite0WithAttention",
-    "DenseNet121", "DenseNet121WithAttention"
+    "DenseNet121", "DenseNet121WithAttention",
+    "MarNASNetC"
 ]
