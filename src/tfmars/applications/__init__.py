@@ -13,7 +13,7 @@ from .efficientnet_lite import EfficientNetLite0, EfficientNetLite0WithAttention
 from .efficientnet import EfficientNetB0, EfficientNetB0WithAttention
 from .densenet import DenseNet121, DenseNet121WithAttention
 
-from .marnasnet import MarNASNetC
+from .marnasnet import *
 
 __all__ = [
     "VGG16", "VGG16WithAttention",
@@ -30,5 +30,5 @@ __all__ = [
     "EfficientNetB0", "EfficientNetB0WithAttention",
     "EfficientNetLite0", "EfficientNetLite0WithAttention",
     "DenseNet121", "DenseNet121WithAttention",
-    "MarNASNetC"
+    "MarNASNetC", "MarNASNetA", "MarNASNetB", "MarNASNetE"
 ]
