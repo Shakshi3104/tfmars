@@ -8,7 +8,8 @@ from ..mobile_inverted_bottleneck import Top, Stem
 
 # MarNASNet-C
 def MarNASNetC(width_coefficient=1.0, depth_coefficient=1.0, depth_divisor=8,
-               include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax'):
+               include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax',
+               params=None):
     """
     Parameters
     ----------
@@ -20,6 +21,8 @@ def MarNASNetC(width_coefficient=1.0, depth_coefficient=1.0, depth_divisor=8,
     pooling
     classes
     classifier_activation
+    params
+
     Returns
     -------
     """
@@ -47,36 +50,37 @@ def MarNASNetC(width_coefficient=1.0, depth_coefficient=1.0, depth_divisor=8,
     filters_in = round_filters(filters_in)
     outputs = Stem(filters_in)(inputs)
 
-    params = [
-        {
-            'conv_op': "MBConv",
-            'kernel_size': 5,
-            'skip_op': "identity",
-            'layers': 2,
-            'filters': 32
-        },
-        {
-            'conv_op': "Conv",
-            'kernel_size': 2,
-            'skip_op': "identity",
-            'layers': 4,
-            'filters': 32
-        },
-        {
-            'conv_op': "MBConv",
-            'kernel_size': 2,
-            'skip_op': "none",
-            'layers': 2,
-            'filters': 192
-        },
-        {
-            'conv_op': "MBConv",
-            'kernel_size': 5,
-            'skip_op': "identity",
-            'layers': 5,
-            'filters': 192
-        }
-    ]
+    if params is None:
+        params = [
+            {
+                'conv_op': "MBConv",
+                'kernel_size': 5,
+                'skip_op': "identity",
+                'layers': 2,
+                'filters': 32
+            },
+            {
+                'conv_op': "Conv",
+                'kernel_size': 2,
+                'skip_op': "identity",
+                'layers': 4,
+                'filters': 32
+            },
+            {
+                'conv_op': "MBConv",
+                'kernel_size': 2,
+                'skip_op': "none",
+                'layers': 2,
+                'filters': 192
+            },
+            {
+                'conv_op': "MBConv",
+                'kernel_size': 5,
+                'skip_op': "identity",
+                'layers': 5,
+                'filters': 192
+            }
+        ]
 
     for i, param in enumerate(params):
         block_id = i + 1
