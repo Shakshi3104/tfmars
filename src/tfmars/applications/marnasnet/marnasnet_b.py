@@ -54,14 +54,14 @@ def MarNASNetB(include_top=True, input_shape=(256, 3), pooling=None, classes=6, 
                 'kernel_size': 5,
                 'skip_op': "identity",
                 'layers': 2,
-                'filters': 64
+                'filters': 32
             },
             {
                 'conv_op': "MBConv",
                 'kernel_size': 5,
                 'skip_op': "identity",
                 'layers': 5,
-                'filters': 128
+                'filters': 32
             }
         ]
 
