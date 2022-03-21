@@ -33,6 +33,17 @@ MARS means **M**obile-aware **A**ctivity **R**ecognition model**S**.
 MarNASNets are **mobile-aware** models that achieves higher accuracy with fewer parameters than existing models.
 There are variations with different search spaces (A - E).
 
+## Install
+
+```bash
+pip install git+https://github.com/Shakshi3104/tfmars.git
+```
+
+## Dependency
+
+- `tensorflow >= 2.4.1`
+
+
 ## Performance
 
 | Model | Accuracy [%] [^1] | Size [MB] [^2] | MFLOPs | Latency [ms] [^3] | CPU load [^3] |
@@ -63,16 +74,6 @@ There are variations with different search spaces (A - E).
 [^2]: Size of MLModel file
 [^3]: Testing conducted using iPhone 12 mini with iOS 15.2
 
-
-## Install
-
-```bash
-pip install git+https://github.com/Shakshi3104/tfmars.git
-```
-
-## Dependency
-
-- `tensorflow >= 2.4.1`
 
 ## Citation 
 
