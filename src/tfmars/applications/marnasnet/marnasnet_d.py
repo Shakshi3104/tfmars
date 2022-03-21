@@ -56,7 +56,7 @@ def MarNASNetD(include_top=True, input_shape=(256, 3), pooling=None, classes=6, 
                 'kernel_size': 2,
                 'skip_op': "identity",
                 'layers': 2,
-                'filters': int(0.25 * 100)
+                'filters': int(0.75 * 100)
             },
             {
                 'conv_op': "MBConv",
