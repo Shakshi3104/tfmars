@@ -70,9 +70,9 @@ pip install git+https://github.com/Shakshi3104/tfmars.git
 
 
 
-[^1]: Verifying accuracy with [HASC-PAC2016](http://hub.hasc.jp) (HASC)
-[^2]: Size of MLModel file
-[^3]: Testing conducted using iPhone 12 mini with iOS 15.2
+[^1]: Verifying accuracy with [HASC-PAC2016](http://hub.hasc.jp) (HASC).
+[^2]: Size of MLModel file.
+[^3]: Testing conducted using iPhone 12 mini with iOS 15.2. [Activitybench](https://github.com/Shakshi3104/Activitybench) 3.9.4 tested with MLComputeUnits=all. Performance tests are conducted using specific computer systems and reflect the approximate performance of iPhone 12 mini.
 
 
 ## Citation 
