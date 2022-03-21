@@ -59,9 +59,9 @@ There are variations with different search spaces (A - E).
 
 
 
-[^1]: HASC dataset
-[^2]: size of MLModel file
-[^3]: test on iPhone 12 mini
+[^1]: Verifying accuracy with [HASC-PAC2016](http://hub.hasc.jp) (HASC)
+[^2]: Size of MLModel file
+[^3]: Testing conducted using iPhone 12 mini with iOS 15.2
 
 
 ## Install
