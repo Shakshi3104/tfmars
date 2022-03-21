@@ -30,5 +30,5 @@ __all__ = [
     "EfficientNetB0", "EfficientNetB0WithAttention",
     "EfficientNetLite0", "EfficientNetLite0WithAttention",
     "DenseNet121", "DenseNet121WithAttention",
-    "MarNASNetC", "MarNASNetA", "MarNASNetB", "MarNASNetE"
+    "MarNASNetC", "MarNASNetA", "MarNASNetB", "MarNASNetE", "MarNASNetD", "MarNASNetCa"
 ]

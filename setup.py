@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="tfmars",
-    version="1.0.0",
+    version="1.0.1",
     author="Shakshi3104",
     description="MarNASNet and famous CNN models for Sensor-based Human Activity Recognition",
     url="https://github.com/Shakshi3104/tfmars",

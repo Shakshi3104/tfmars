@@ -1,7 +1,6 @@
 import tensorflow as tf
 import math
 
-
 from .blocks import ConvBlock, SkipOperation, RegularConvBlock, MBConvBlock
 from ..mobile_inverted_bottleneck import Top, Stem
 
@@ -26,6 +25,7 @@ def MarNASNetC(width_coefficient=1.0, depth_coefficient=1.0, depth_divisor=8,
     Returns
     -------
     """
+
     def round_filters(filters_, divisor=depth_divisor):
         """Round number of filters based on depth multiplier."""
         filters_ *= width_coefficient
@@ -131,3 +131,39 @@ def MarNASNetC(width_coefficient=1.0, depth_coefficient=1.0, depth_divisor=8,
     # Create model
     model = tf.keras.models.Model(inputs, outputs)
     return model
+
+
+# MarNASNet-Ca
+def MarNASNetCa(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax'):
+    params = [
+        {
+            'conv_op': "MBConv",
+            'kernel_size': 5,
+            'skip_op': "identity",
+            'layers': 2,
+            'filters': 32
+        },
+        {
+            'conv_op': "Conv",
+            'kernel_size': 2,
+            'skip_op': "identity",
+            'layers': 4,
+            'filters': 82
+        },
+        {
+            'conv_op': "MBConv",
+            'kernel_size': 2,
+            'skip_op': "none",
+            'layers': 2,
+            'filters': 132
+        },
+        {
+            'conv_op': "MBConv",
+            'kernel_size': 5,
+            'skip_op': "identity",
+            'layers': 5,
+            'filters': 192
+        }
+    ]
+
+    return MarNASNetC(1.0, 1.0, 8, include_top, input_shape, pooling, classes, classifier_activation, params)
