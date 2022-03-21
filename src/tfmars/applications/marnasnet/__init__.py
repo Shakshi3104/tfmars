@@ -8,5 +8,7 @@ __all__ = [
     "MarNASNetC",
     "MarNASNetA",
     "MarNASNetB",
-    "MarNASNetE"
+    "MarNASNetE",
+    "MarNASNetD",
+    "MarNASNetCa"
 ]
