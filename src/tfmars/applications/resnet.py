@@ -171,4 +171,4 @@ def ResNet18WithAttention(include_top=True, input_shape=(256, 3), pooling=None, 
 
 # ResNet 18
 def ResNet18(include_top=True, input_shape=(256, 3), pooling=None, classes=6, classifier_activation='softmax'):
-    return ResNet18(include_top, input_shape, pooling, classes, classifier_activation)
+    return ResNet18WithAttention(include_top, input_shape, pooling, classes, classifier_activation, module=None)
